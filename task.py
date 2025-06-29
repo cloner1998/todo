@@ -1,15 +1,17 @@
 from enums.priority import Priority
 
+
 class Task:
-    def __init__(self, name, description, priority):
+    def __init__(self, name: str, description: str, priority):
         self.name = name
         self.description = description
         if not isinstance(priority, Priority):
             raise TypeError("Priority must be of type Priority")
         self.priority = priority
 
-
     def update_priority(self, priority):
+        if not isinstance(priority, Priority):
+            raise TypeError("Priority must be of type Priority")
         self.priority = priority
         return self
 
