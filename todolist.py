@@ -52,20 +52,21 @@ class ToDOList:
         return self
 
     def upload_from_input(self):
+        priority_mapping = {
+            "HIGH": Priority.HIGH,
+            "MEDIUM": Priority.MEDIUM,
+            "LOW": Priority.LOW
+        }
         with open("io/input.csv", "r") as file:
             reader = csv.DictReader(file)
             for row in reader:
                 name = row["name"]
                 description = row["description"]
-                sample_prio = row["priority"]
-                if priority == Priority.HIGH:
-                    sample_prio = Priority.HIGH
-                elif sample_prio == Priority.MEDIUM:
-                    sample_prio = Priority.MEDIUM
-                elif sample_prio == Priority.LOW:
-                    sample_prio = Priority.LOW
+                priority_str = row["priority"]
 
-                task = Task(name=name, description=description, priority=Priority(sample_prio))
+                task_priority = priority_mapping.get(priority_str, Priority.LOW)
+
+                task = Task(name=name, description=description, priority=task_priority)
                 self.add(task)
         return self
     def save_to_output(self):
