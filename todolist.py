@@ -4,8 +4,8 @@ from typing import List
 
 class ToDOList:
 
-    def __init__(self):
-        self.todos: List[Task] = []
+    def __init__(self, tasks: List[Task]) -> None:
+        self.todos = tasks
 
     def add(self, task: Task):
         self.todos.append(task)
