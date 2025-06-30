@@ -70,4 +70,17 @@ class ToDOList:
                 self.add(task)
         return self
     def save_to_output(self):
-        pass
+        priority_mapping = {
+            Priority.HIGH : "HIGH",
+            Priority.MEDIUM: "MEDIUM" ,
+             Priority.LOW: "LOW"
+        }
+        with open("io/output.csv", "w", newline='') as file:
+            fieldnames = ["name", "description", "priority"]
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            for task in self.todos:
+                writer.writerow({"name": task.name, "description": task.description,
+                                 "priority": priority_mapping.get(task.priority)})
+
+            return self

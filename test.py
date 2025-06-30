@@ -32,3 +32,6 @@ if __name__ == '__main__':
     print("___________")
     todolist.upload_from_input()
     todolist.show_all_tasks()
+
+    print("___________")
+    todolist.save_to_output()
