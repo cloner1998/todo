@@ -1,8 +1,7 @@
 import csv
 
-from enums import priority
 from enums.priority import Priority
-from task import Task
+from model.task import Task
 from typing import List
 
 

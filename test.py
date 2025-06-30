@@ -1,6 +1,6 @@
 from enums.priority import Priority
-from task import Task
-from todolist import ToDOList
+from model.task import Task
+from model.todolist import ToDOList
 
 if __name__ == '__main__':
     task_1 =  Task("first task", "task 1", priority=Priority.MEDIUM)
