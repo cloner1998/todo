@@ -1,3 +1,6 @@
+import csv
+
+from enums import priority
 from enums.priority import Priority
 from task import Task
 from typing import List
@@ -48,5 +51,22 @@ class ToDOList:
 
         return self
 
-    def save_csv(self):
+    def upload_from_input(self):
+        with open("io/input.csv", "r") as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                name = row["name"]
+                description = row["description"]
+                sample_prio = row["priority"]
+                if priority == Priority.HIGH:
+                    sample_prio = Priority.HIGH
+                elif sample_prio == Priority.MEDIUM:
+                    sample_prio = Priority.MEDIUM
+                elif sample_prio == Priority.LOW:
+                    sample_prio = Priority.LOW
+
+                task = Task(name=name, description=description, priority=Priority(sample_prio))
+                self.add(task)
+        return self
+    def save_to_output(self):
         pass

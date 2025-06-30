@@ -29,3 +29,6 @@ if __name__ == '__main__':
     todolist.update_description_of_task(description= "new description", task= task_1)
     todolist.show_all_tasks()
 
+    print("___________")
+    todolist.upload_from_input()
+    todolist.show_all_tasks()
