@@ -30,10 +30,14 @@ def modify_todo_list(todo_list, modification_ans):
             "MEDIUM": Priority.MEDIUM,
             "LOW": Priority.LOW
         }
-        task = Task(name, description, priority_mapping.get(priority.upper()))
-        ToDOList.add(todo_list, task)
-        print("task added successfully")
-        done = True
+        try:
+            task = Task(name, description, priority_mapping.get(priority.upper()))
+            ToDOList.add(todo_list, task)
+            print("task added successfully")
+            done = True
+        except TypeError as e:
+            print("please enter valid input for priority (high, medium, low)")
+            done = False
     elif modification_ans.upper() == "REMOVE":
         remove_task_name = input("enter task name : ")
         task = ToDOList.find_task_by_name(todo_list, remove_task_name)
