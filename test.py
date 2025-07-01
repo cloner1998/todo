@@ -23,6 +23,11 @@ if __name__ == '__main__':
     print("__________")
     todolist.show_all_tasks()
 
+    print("_________")
+    todolist.remove_task_by_name("sssssss")
+    todolist.show_all_tasks()
+
+
     print("__________")
     todolist.update_name_of_task("new_name",task_1)
     todolist.update_priority_of_task(priority= Priority.HIGH, task= task_1)

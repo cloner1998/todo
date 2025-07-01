@@ -21,6 +21,18 @@ class ToDOList:
             print(f"Task {task.name} not found in the list")
         return self
 
+    def remove_task_by_name(self, name: str):
+        desired_task = None
+        for task in self.todos:
+            if task.name == name:
+                desired_task = task
+
+        if desired_task is None:
+            print(f"Task {name} not found in the list")
+            return None
+        else:
+            return self.todos.remove(desired_task)
+
     def show_all_tasks(self):
         for task in self.todos:
             print(task)
@@ -79,11 +91,12 @@ class ToDOList:
                 task = Task(name=name, description=description, priority=task_priority)
                 self.add(task)
         return self
+
     def save_to_output(self):
         priority_mapping = {
-            Priority.HIGH : "HIGH",
-            Priority.MEDIUM: "MEDIUM" ,
-             Priority.LOW: "LOW"
+            Priority.HIGH: "HIGH",
+            Priority.MEDIUM: "MEDIUM",
+            Priority.LOW: "LOW"
         }
         with open("io/output.csv", "w", newline='') as file:
             fieldnames = ["name", "description", "priority"]

@@ -2,15 +2,13 @@ from enums.priority import Priority
 from model.task import Task
 from model.todolist import ToDOList
 
+
 def make_default_todo_list():
     task = Task("default", "default", Priority.MEDIUM)
     list_todo = [task]
     todo_list = ToDOList(list_todo)
     return todo_list
 
-
-def upload_todo_list():
-    pass
 
 def check_permission(permission: str):
     if permission.upper() == "Y":
@@ -40,11 +38,12 @@ def modify_todo_list(todo_list, modification_ans):
             done = False
     elif modification_ans.upper() == "REMOVE":
         remove_task_name = input("enter task name : ")
-        task = ToDOList.find_task_by_name(todo_list, remove_task_name)
-        if task is not None:
-            ToDOList.remove(todo_list, task)
+
+        if todo_list.remove_task_by_name(remove_task_name) is not None:
             print("task removed successfully")
-        done = True
+            done = True
+        else:
+            done = False
     elif modification_ans.upper() == "SHOW":
         ToDOList.show_all_tasks(todo_list)
         done = True
@@ -55,6 +54,10 @@ def modify_todo_list(todo_list, modification_ans):
 
 
 def save_todo_list(todo_list):
+    pass
+
+
+def upload_todo_list():
     pass
 
 
