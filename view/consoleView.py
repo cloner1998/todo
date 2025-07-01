@@ -1,4 +1,5 @@
 from enums.priority import Priority
+from model import todolist
 from model.task import Task
 from model.todolist import ToDOList
 
@@ -54,12 +55,12 @@ def modify_todo_list(todo_list, modification_ans):
 
 
 def save_todo_list(todo_list):
-    pass
+    ToDOList.save_to_output(todo_list)
 
 
-def upload_todo_list():
-    pass
-
+def upload_todo_list(todo_list: ToDOList):
+    ToDOList.upload_from_input(todo_list)
+    return todo_list
 
 class ConsoleView:
 
@@ -68,7 +69,7 @@ class ConsoleView:
         todo_list = make_default_todo_list()
         ans = input("do you want to upload your todolist (from io/input.csv)? (y/n)")
         if check_permission(ans):
-            upload_todo_list()
+            upload_todo_list(todo_list)
 
         exit_run = False
         while not exit_run:

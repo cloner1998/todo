@@ -24,4 +24,10 @@ class Task:
         return self
 
     def __str__(self):
-        return f"name: {self.name}, description: {self.description}, priority: {self.priority}"
+        priority_mapping = {
+            Priority.HIGH: "HIGH",
+            Priority.MEDIUM: "MEDIUM",
+            Priority.LOW: "LOW"
+        }
+
+        return f"name: {self.name}, description: {self.description}, priority: {priority_mapping.get(self.priority)}"
