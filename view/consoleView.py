@@ -1,21 +1,18 @@
-from controller.controller import Controller
 from enums.priority import Priority
 from model.task import Task
 from model.todolist import ToDOList
 
-
-def make_default_todo_list(self):
-    task = Task("name", "description", Priority.MEDIUM)
+def make_default_todo_list():
+    task = Task("default", "default", Priority.MEDIUM)
     list_todo = [task]
     todo_list = ToDOList(list_todo)
     return todo_list
 
 
-def upload_todo_list(self):
-    return self.controller.upload_data()
+def upload_todo_list():
+    pass
 
-
-def check_permission(self, permission: str):
+def check_permission(permission: str):
     if permission.upper() == "Y":
         return True
     if permission.upper() == "N":
@@ -24,33 +21,61 @@ def check_permission(self, permission: str):
 
 
 def modify_todo_list(todo_list, modification_ans):
-    pass
+    if modification_ans.upper() == "ADD":
+        name = input("enter task name : ")
+        description = input("enter task description : ")
+        priority = input("enter task priority : ")
+        priority_mapping = {
+            "HIGH": Priority.HIGH,
+            "MEDIUM": Priority.MEDIUM,
+            "LOW": Priority.LOW
+        }
+        task = Task(name, description, priority_mapping.get(priority.upper()))
+        ToDOList.add(todo_list, task)
+        print("task added successfully")
+        done = True
+    elif modification_ans.upper() == "REMOVE":
+        remove_task_name = input("enter task name : ")
+        task = ToDOList.find_task_by_name(todo_list, remove_task_name)
+        if task is not None:
+            ToDOList.remove(todo_list, task)
+            print("task removed successfully")
+        done = True
+    elif modification_ans.upper() == "SHOW":
+        ToDOList.show_all_tasks(todo_list)
+        done = True
+    else:
+        print("your answer is not valid")
+        done = False
+    return done
 
 
-def save_todo_list(todo_list, save_ans):
+def save_todo_list(todo_list):
     pass
 
 
 class ConsoleView:
-    def __init__(self, controller: Controller):
-        self.controller = controller
 
-    def run(self):
-        todo_list = make_default_todo_list(self)
+    @staticmethod
+    def run():
+        todo_list = make_default_todo_list()
         ans = input("do you want to upload your todolist (from io/input.csv)? (y/n)")
-        if check_permission(self, ans):
-            todo_list = upload_todo_list(self)
+        if check_permission(ans):
+            upload_todo_list()
 
         exit_run = False
         while not exit_run:
-            modification_ans = input("how do you want to modify your todo list? (add, remove, show")
-            modify_todo_list(todo_list, modification_ans)
+            done = False
+            while not done:
+                modification_ans = input("how do you want to modify your todo list? (add, remove, show)")
+                done = modify_todo_list(todo_list, modification_ans)
 
             exit_ans = input("Do you want to exit? (y/n)")
-            if check_permission(self, exit_ans):
+            if check_permission(exit_ans):
                 exit_run = True
 
             pass
 
         save_ans = input("Do you want to save your todolist? (y/n)")
-        save_todo_list(todo_list, save_ans)
+        if check_permission(save_ans):
+            save_todo_list(todo_list)

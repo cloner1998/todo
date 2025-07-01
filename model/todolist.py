@@ -50,6 +50,17 @@ class ToDOList:
 
         return self
 
+    def find_task_by_name(self, name: str):
+        try:
+            for task in self.todos:
+                if task.name == name:
+                    return task
+                return None
+            return None
+        except ValueError:
+            print(f"Task {name} not found in the list")
+            return None
+
     def upload_from_input(self):
         priority_mapping = {
             "HIGH": Priority.HIGH,

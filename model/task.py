@@ -24,4 +24,4 @@ class Task:
         return self
 
     def __str__(self):
-        return f"Task info: name: {self.name}, description: {self.description}, priority: {self.priority}"
+        return f"name: {self.name}, description: {self.description}, priority: {self.priority}"
