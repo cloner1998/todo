@@ -35,7 +35,7 @@ class Controller:
         self.todo_list.update_priority_of_task(priority_mapping.get(priority), task)
         return self.todo_list
 
-    def upload_date(self):
+    def upload_data(self):
         self.todo_list.upload_from_input()
         return self.todo_list
 
